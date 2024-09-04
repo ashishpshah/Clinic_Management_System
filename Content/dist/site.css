@@ -1,0 +1,108 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.form-control-error {
+    border: 1px solid #ff0000 !important;
+}
+
+[class*=icheckPadding] {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    padding-left: 7.5px !important;
+    padding-right: 7.5px !important;
+}
+.select2-container {
+    box-sizing: border-box;
+    display: initial;
+    margin: 0;
+    position: relative;
+    vertical-align: middle;
+}
+.select2-container .select2-selection--single {
+    width: 100% !important;
+    height: calc(2.25rem + 2px) !important;
+    padding: 0.575rem 0.75rem !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    color: #495057 !important;
+    background-color: #fff !important;
+    background-clip: padding-box !important;
+    border: 1px solid #ced4da !important;
+    border-radius: 0.25rem !important;
+    box-shadow: inset 0 0 0 rgba(0, 0, 0, 0) !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    color: #495057 !important;
+    background-color: #fff !important;
+}
+
+.nav-treeview > .nav-item > .nav-link.active {
+    background-color: #3d9970 !important;
+}
+.icon_container > i, .icon_container2 > i {
+    position: relative;
+    top: calc(50% - 10px); /* 50% - 3/4 of icon height */
+}
+.icon-play-circle {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+}
+.main-header.text-sm .nav-link, .text-sm .main-header .nav-link{
+    height:2.5rem !important;
+    padding:0.35rem 1rem !important;
+}
+.brand-link{
+    padding:1.05rem 0.5rem !important;
+}
+
+.chartCard {
+    width: auto;
+    height: auto;
+}
+.chartBox {
+    width: 700px;
+    height: 450px;
+    padding: 20px;
+    border-radius: 20px;
+    background: white;
+}
+@media only screen and (max-width:1550px){
+    .chartBox {
+        width: auto;
+        height: auto;
+        padding: 20px;
+    }
+}
+@media only screen and (max-width:1050px) {
+    .chartBox {
+        width: 450px;
+        height: 450px;
+        padding: 20px;
+    }
+}
+@media only screen and (max-width:570px) {
+    .chartBox {
+        width: 700px;
+        height: 450px;
+        padding: 20px;
+    }
+}

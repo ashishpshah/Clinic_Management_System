@@ -1,0 +1,129 @@
+﻿@model ResponseModel<User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">User</h1>
+            </div>
+            <div class="col-sm-6">
+                <div class="float-sm-right">
+                    @if (Model.IsCreate == true)
+                    {
+                        <button type="button" id="btnAddNewItem" class="btn btn-primary btn-md pull-right mr-2" onclick="fnLoadParialView('divformSave', '@Url.Action("Partial_AddEditForm","User", new {  area = "Admin" })');">
+                            <i class="fas fa-plus"></i> &nbsp; Add new item
+                        </button>
+                    }
+                    <button type="button" id="btnBackToList" class="btn btn-warning btn-md pull-right mr-2 d-none" onclick="fnBackToList();">
+                        <i class="fas fa-arrow-left"></i> &nbsp; Back To List
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row no-gooters">
+            <section class="col-md-12">
+                <div class="card">
+                    <div class="card-header divformSave_Display d-none" style="margin: 5px !important;">
+                        <form id="formSave" action="@Url.Action("Save","User", new {  area = "Admin"})" method="post">
+                            <div class="row no-gutters" id="divformSave"></div>
+                            <div class="clearfix"></div>
+                            <hr />
+                        </form>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row no-gooters">
+                            <div class="col-md-12 my-1">
+                                <table id="table_Common_SrNo" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>@*<th>#</th>*@<th>#</th><th>User Name</th><th>Role</th><th>Action</th></tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @if (Model.ObjList != null)
+                                        {
+                                            foreach (var item in Model.ObjList)
+                                            {
+                                                <tr>
+                                                    @*<td></td>*@
+                                                    <td></td>
+                                                    <td>@item.UserName</td>
+                                                    <td>@item.User_Role</td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            @if (Model.IsUpdate == true)
+                                                            {
+                                                                <button type="button" class="btn btn-info btn-sm btn-flat" data-toggle="tooltip" data-placement="top" title="Edit"
+                                                                        onclick="fnLoadParialView('divformSave', '@Url.Action("Partial_AddEditForm","User", new {  area = "Admin" })?Id=@item.Id');">
+                                                                    <i class="far fa-edit"></i>
+                                                                </button>
+                                                            }
+                                                            @if (Model.IsDelete == true && item.IsDeleted == false)
+                                                            {
+                                                                <button type="button" class="btn btn-danger btn-sm btn-flat ml-2" data-toggle="tooltip" data-placement="top" title="Delete"
+                                                                        onclick="fnDelete_Confirm('@Url.Action("DeleteConfirmed","User", new {  area = "Admin" })?Id=@item.Id');">
+                                                                    <i class="far fa-trash-alt"></i>
+                                                                </button>
+                                                            }
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @*var table = $('#table_Common').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+                //"dom": 'Bfrtip',
+                //"scrollY": "300px",
+                //"scrollX": true,
+                //"scrollCollapse": true,
+                "columnDefs": [
+                    //{ "targets": 0, "className": "select-checkbox", "width": "3%", "sorting": false },
+                    { "targets": 0, "className": "text-center", "width": "3%" }
+                    , { "targets": -1, "className": "text-center", "width": "5%", "sorting": false }
+                ],
+                "fixedColumns": true,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    var index = iDisplayIndexFull + 1;
+                    $("td:eq(0)", nRow).html(index);
+                    //$("td:last", nRow).html('<div class="btn-group"> <button type="button" class="btn btn-info btn-sm btn-flat" data-toggle="tooltip" data-placement="top" title="Edit"' +
+                    //    ' onclick="fnLoadParialView(\'divformSave\', \'@Url.Action("Partial_AddEditForm","User", new {  area = "Admin" })?Id=' + aData.Id +'\');"> <i class="far fa-edit"></i> </button> ' +
+                    //    '<button type="button" class="btn btn-danger btn-sm btn-flat ml-2" data-toggle="tooltip" data-placement="top" title="Delete"> <i class="far fa-trash-alt"></i> </button></div>');
+                    return nRow;
+                }
+            });*@
+        });
+
+    </script>
+}

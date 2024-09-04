@@ -1,0 +1,126 @@
+﻿@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <link href="~/Content/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" rel="stylesheet" />
+    <link href="~/Content/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/Content/dist/site.css" rel="stylesheet" />
+
+    <style>
+        .divider:after,
+        .divider:before {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
+        }
+
+        .h-custom {
+            height: calc(100% - 73px);
+        }
+
+        /*   @@media (max-width: 450px) {
+            .h-custom {
+                height: 100%;
+            }
+        }*/
+
+        .eye-pass {
+            position: absolute;
+            margin-top: 15px;
+            top: -4px;
+            right: 0;
+            margin-right: 35px;
+            cursor: pointer;
+        }
+
+        input[type=password]::-ms-reveal,
+        input[type=password]::-ms-clear {
+            display: none;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini" style="overflow:hidden">
+    <div class="wrapper">
+        <section class="vh-100">
+            <div class="container-fluid h-custom">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-md-9 col-lg-6 col-xl-5" style="padding-left:90px !important;padding-right:80px !important;">
+
+                        <img src="~/Content/images/PGLogo1.png" />
+                    </div>
+                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                        <div class=" form-group-row col-sm-12" style="text-align:center"><h2 style="text-decoration:underline">LOGIN</h2></div>
+
+                        @using (Html.BeginForm("Login", "Home", new { area = "Admin" }, FormMethod.Post, new { id = "formLogin", @class = "", enctype = "multipart/form-data", @data_form_isvalidate = "" }))
+                        {
+                            <div class="form-outline mb-4 col-sm-12">
+                                <label class="form-label" for="UserId">User Id</label>
+                                <input type="text" id="UserName" name="UserName" class="form-control" placeholder="User name"
+                                       data-required data-msg="The Username field is required." autocomplete="off">
+                            </div>
+                            <div class="form-outline mb-4 col-sm-12">
+                                <label for="Password" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-12 mb-4">
+                                    <input type="password" id="Password" name="Password" class="form-control" data-required data-msg="The Password field is required." autocomplete="off">
+                                    <i class="fa fa-eye eye-pass fa-eye-slash" onclick="fnChangeIcon(),runScript(this.value)" id="togglePassword"></i>
+                                </div>
+                            </div>
+                            <input type="text" class="d-none" id="usertype" name="User_Type">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="row px-3 mb-4">
+                                    <a href="@Url.Action("ForgotPassword","Home", new { area="Admin" })" style="color: #29294e;text-decoration:underline">Forgot password?</a>
+                                </div>
+                            </div>
+
+                            <div class="text-center text-lg-start mt-4 pt-2">
+                                <button type="button" class="btn" style="background-color:navy;color:white" onclick="fnSubmitForm('formLogin')">Log in</button>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="~/Content/dist/js/adminlte.js"></script>
+    <script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/Content/common.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //setTimeout(function () { $("#UserName").trigger('change'); }, 500);
+
+            $('body').on('blur', '#UserName', function (e) {
+                e.preventDefault();
+            });
+
+        });
+
+        function fnChangeIcon() {
+            const togglePassword = document.querySelector('#togglePassword');
+            const password = document.querySelector('#Password');
+            const type = password.getAttribute('type') === 'Password' ? 'text' : 'Password';
+            password.setAttribute('type', type);
+            togglePassword.classList.toggle('fa-eye-slash');
+        }
+
+    </script>
+</body>
+</html>

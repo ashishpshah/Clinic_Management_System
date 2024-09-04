@@ -1,0 +1,115 @@
+﻿@model ResponseModel<User>
+
+@{ Layout = null; }
+
+<div class="col-md-12">
+    <div class="card card-info">
+
+        <div class="card-header">
+            <h3 class="card-title">@(Model.Obj != null && Model.Obj.Id > 0 ? "Edit": "Create") User</h3>
+            <input type="text" class="form-control d-none" id="Id" name="Obj.Id" value="@(Model.Obj != null && Model.Obj.Id > 0 ? Model.Obj.Id.ToString() : "")">
+            <input type="text" class="form-control d-none" id="RoleId" name="Obj.RoleId" value="@(Model.Obj != null && Model.Obj.User_Role_Id > 0 ? Model.Obj.User_Role_Id.ToString() : "")">
+            <input type="text" class="form-control d-none" id="User_Id_Str" name="Obj.User_Id_Str" value="@(Model.Obj != null ? Model.Obj.User_Id_Str : "")">
+            <input type="text" class="form-control d-none" id="Role_Id_Str" name="Obj.Role_Id_Str" value="@(Model.Obj != null ?Model.Obj.Role_Id_Str : "")">
+        </div>
+
+        <div class="card-body">
+            <div class="row no-gutters">
+                <div class="col-6">
+                    <div class="form-group row">
+                        <label for="Obj.Username" class="col-sm-2 col-form-label text-right">User Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control form-control-sm" id="Username" name="Obj.Username" value="@Model.Obj.UserName" placeholder="Username" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group row @(Model.Obj != null && Model.Obj.Id > 0 ? "d-none": "")">
+                        <label for="Obj.Password" class="col-sm-2 col-form-label text-right">Password</label>
+                        <div class="col-sm-6">
+                            <div class="input-group mb-3">
+                                <input type="password" data-altType="text" class="form-control form-control-sm" id="Password" name="Obj.Password" placeholder="********" autocomplete="off">
+                                <div class="input-group-append"> <div class="input-group-text"> <i class="fa fa-eye-slash" data-defaultClass="fa-eye-slash" data-altClass="fa-eye" onclick="fnChange_InputType(this, 'Password')" style="cursor: pointer;"></i> </div> </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="Obj.IsActive" class="col-sm-2 col-form-label text-right">Status</label>
+                        <div class="col-sm-6">
+                            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success form-control border-0">
+                                <input type="checkbox" class="custom-control-input" id="switch_Status"
+                                       name="Obj.IsActive" @((Model.Obj != null && Model.Obj.IsActive == true) || Model.Obj.Id == 0 ? "checked" : "")
+                                       onchange="fnChange_Switch(this, 'label_Switch_Status')">
+                                <label class="custom-control-label" for="switch_Status" id="label_Switch_Status" data-true="Active" data-false="Inactive">
+                                    @((Model.Obj != null && Model.Obj.IsActive == true) || Model.Obj.Id == 0 ? "Active":"Inactive")
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row @(Model.Obj != null && Model.Obj.Id > 0 ? "": "d-none")">
+                        <label for="Obj.IsPassword_Reset" class="col-sm-2 col-form-label text-right">Password Reset</label>
+                        <div class="col-sm-6">
+                            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success form-control border-0">
+                                <input type="checkbox" class="custom-control-input" id="switch_Password_Reset"
+                                       name="Obj.IsPassword_Reset" onchange="fnChange_Switch(this, 'label_Switch_Password_Reset')">
+                                <label class="custom-control-label" for="switch_Password_Reset" id="label_Switch_Password_Reset" data-true="Yes" data-false="No">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+
+                    <div class="form-group row">
+                        <label for="Obj.User_Role_Id" class="col-sm-2 col-form-label text-right">Role</label>
+                        <div class="col-sm-6">
+                            <select id="ddlUser_Role_Id" name="Obj.User_Role_Id" class="form-control form-control-sm select2">
+                                <option value="0">-- Select --</option>
+                                @if (Model.SelectListItems != null)
+                                {
+                                    foreach (var item in Model.SelectListItems.Where(x => x.Group == "R"))
+                                    {
+                                        if (Model.Obj.User_Role_Id.ToString() == item.Value || Model.SelectListItems.Where(x => x.Group == "R").Count() == 1)
+                                        {
+                                            <option value="@item.Value" selected>@item.Text</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-right">Datepicker</label>
+                        <div class="col-sm-6">
+                            <input type="date" name="Obj.Date_Text" class="form-control form-control-sm" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <div class="row no-gutters">
+                <div class="col-sm-1">&nbsp;</div>
+                <div class="col-sm-6 text-left">
+                    <button type="submit" class="btn btn-success btnSubmit">Save</button>
+                    @*<button type="button" class="btn btn-danger">Cancel</button>*@
+                    <a href="@Url.Action("Index","User", new {  area = "Admin" })" class="btn btn-danger">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+}
