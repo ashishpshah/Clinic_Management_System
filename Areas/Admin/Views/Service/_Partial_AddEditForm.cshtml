@@ -1,0 +1,81 @@
+﻿@model ResponseModel<Service>
+
+@{ Layout = null; }
+
+<div class="col-md-12">
+    <div class="card card-info">
+
+        <div class="card-header">
+            <h3 class="card-title">@(Model.Obj != null && Model.Obj.Id > 0 ? "Edit": "Create") Service</h3>
+            <input type="text" class="form-control d-none" id="Id" name="Id" value="@(Model.Obj != null && Model.Obj.Id > 0 ? Model.Obj.Id.ToString() : "")">
+        </div>
+
+        <div class="card-body">
+            <div class="row no-gutters">
+                <div class="col-12">
+                    <div class="form-group row">
+                        <label for="Name" class="col-sm-2 col-form-label text-right">Name</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control form-control-sm" id="Name" name="Name" value="@Model.Obj.Name"
+                                   data-required data-msg="The Service Name field is required." placeholder="Service" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Heading1" class="col-sm-2 col-form-label text-right">Heading</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control form-control-sm" id="Heading1" name="Heading1" value="@Model.Obj.Heading1" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Description1" class="col-sm-2 col-form-label text-right">Description</label>
+                        <div class="col-sm-8">
+                            @*<input type="text" class="form-control form-control-sm" id="Description1" name="Description1" value="@Model.Obj.Description1" autocomplete="off">*@
+                            <textarea class="form-control form-control-sm" id="Description1" name="Description1">@Model.Obj.Description1</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Heading1" class="col-sm-2 col-form-label text-right">Image</label>
+                        <div class="col-sm-8">
+                            <input type="file" name="file" id="ImagePath">
+                            @if (Model.Obj.ImagePath != null)
+                            {
+                                <br /><br />
+                                <img src="@Model.Obj.GetImagePath()" alt="Image" width="150px" height="150px" />
+                                <input type="hidden" id="ImagePath" name="ImagePath" value="@Model.Obj.ImagePath" />
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="IsActive" class="col-sm-2 col-form-label text-right">Status</label>
+                        <div class="col-sm-6">
+                            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success form-control border-0">
+                                <input type="checkbox" class="custom-control-input"
+                                       id="switch_Status" name="IsActive" @(Model.Obj == null || Model.Obj.IsActive == true || Model.Obj.Id == 0 ? "checked" : "")
+                                       onchange="fnChange_Switch(this, 'label_Switch_Status')">
+                                <label class="custom-control-label" for="switch_Status" id="label_Switch_Status" data-true="Active" data-false="Inactive">@((Model.Obj != null && Model.Obj.IsActive == true) || Model.Obj == null || Model.Obj.Id == 0 ? "Active":"Inactive")</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <div class="row no-gutters">
+                <div class="col-sm-1">&nbsp;</div>
+                <div class="col-sm-6 text-left">
+                    <button type="submit" class="btn btn-success btnSubmit">Save</button>
+                    <button type="button" class="btn btn-danger" onclick="fnCloseParialView('divformSave', '#table_Common');">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+}

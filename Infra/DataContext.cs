@@ -16,6 +16,8 @@ namespace Clinic_Management_System
 
 		public virtual DbSet<Attachment> Attachments { get; set; }
 		public virtual DbSet<Department> Departments { get; set; }
+		public virtual DbSet<Gallery> Gallery { get; set; }
+		public virtual DbSet<Service> Services { get; set; }
 		public virtual DbSet<Employee> Employees { get; set; }
 		public virtual DbSet<Menu> Menus { get; set; }
 		public virtual DbSet<Role> Roles { get; set; }
@@ -30,6 +32,8 @@ namespace Clinic_Management_System
 		{
 			modelBuilder.Entity<Attachment>().HasKey(e => new { e.Id }).ToTable("Attachments");
 			modelBuilder.Entity<Department>().HasKey(e => new { e.Id }).ToTable("Department");
+			modelBuilder.Entity<Gallery>().HasKey(e => new { e.Id }).ToTable("Gallery");
+			modelBuilder.Entity<Service>().HasKey(e => new { e.Id }).ToTable("Services");
 			modelBuilder.Entity<Employee>().HasKey(e => new { e.Id, e.UserId, e.RoleId }).ToTable("Employee");
 			modelBuilder.Entity<User>().HasKey(e => new { e.Id, e.UserName }).ToTable("Users");
 			modelBuilder.Entity<Role>().HasKey(e => new { e.Id }).ToTable("Roles");
