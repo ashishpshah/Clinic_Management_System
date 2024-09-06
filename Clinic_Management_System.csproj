@@ -142,6 +142,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccessController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GalleryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServiceController.cs" />
     <Compile Include="Areas\Admin\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmployeeController.cs" />
@@ -150,7 +151,7 @@
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Models\Service.cs" />
-    <Compile Include="Areas\Admin\Models\Gallary.cs" />
+    <Compile Include="Areas\Admin\Models\Gallery.cs" />
     <Compile Include="Areas\Admin\Models\Department.cs" />
     <Compile Include="Areas\Admin\Models\Employee.cs" />
     <Compile Include="Areas\Admin\Models\Menu.cs" />
@@ -579,6 +580,8 @@
     <Content Include="Content\images\prod-3.jpg" />
     <Content Include="Content\images\prod-4.jpg" />
     <Content Include="Content\images\prod-5.jpg" />
+    <Content Include="Content\images\services\20240905162946_3.png" />
+    <Content Include="Content\images\services\20240906115822_2.png" />
     <Content Include="Content\images\user.png" />
     <Content Include="Content\images\visa.png" />
     <Content Include="Content\no_image_available.png" />
@@ -2649,6 +2652,8 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Service\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Service\_Partial_AddEditForm.cshtml" />
+    <Content Include="Areas\Admin\Views\Gallery\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Gallery\_Partial_AddEditForm.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2678,6 +2683,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\images\Gallery\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

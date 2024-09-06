@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Clinic_Management_System
+﻿namespace Clinic_Management_System
 {
-	public partial class Service : EntitiesBase
+    public partial class Service : EntitiesBase
 	{
         public override long Id { get; set; }
         public string Name { get; set; }

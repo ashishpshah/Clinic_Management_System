@@ -329,15 +329,28 @@ function fnSubmitForm($id) {
 
         if (typeof inputFiles != 'undefined' && inputFiles != null && inputFiles.length > 0)
             $.each(inputFiles, function (key, input) {
-                if ((typeof input.value != 'undefined' && input.value != null && input.value.length > 0) && !input.hasAttribute('disabled') && !$(input).hasClass('temp') && !$(input).hasClass('temp_fileUpload')) {
-                    var file = document.getElementById('' + input.getAttribute('id')).files[0];
-                    if (typeof input.getAttribute('name') == 'undefined' || input.getAttribute('name') == null || input.getAttribute('name').length == 0) {
-                        formData.append("files", file);
+                var files = input.files; // Get the selected files
+                if (files.length > 0) {
+                    // Check if it's a single file or multiple files input
+                    if (files.length === 1) {
+                        formData.append("file", files[0]); // Single file
                     } else {
-                        formData.append(input.getAttribute('name'), file);
+                        for (var i = 0; i < files.length; i++) {
+                            formData.append("files", files[i]); // Multiple files
+                        }
                     }
                 }
             });
+        //$.each(inputFiles, function (key, input) {
+        //    if ((typeof input.value != 'undefined' && input.value != null && input.value.length > 0) && !input.hasAttribute('disabled') && !$(input).hasClass('temp') && !$(input).hasClass('temp_fileUpload')) {
+        //        var file = document.getElementById('' + input.getAttribute('id')).files[0];
+        //        if (typeof input.getAttribute('name') == 'undefined' || input.getAttribute('name') == null || input.getAttribute('name').length == 0) {
+        //            formData.append("files", file);
+        //        } else {
+        //            formData.append(input.getAttribute('name'), file);
+        //        }
+        //    }
+        //});
 
         $.ajax({
             type: 'POST',
